@@ -52,20 +52,22 @@ SHOW WARNINGS;
 
 DELETE FROM questions WHERE question_helpfulness IS NULL;
 
--- LOAD DATA LOCAL INFILE '/Users/mrcruz/HackReactor/SDC-CSV/answerTest.csv'
--- INTO TABLE answers
--- FIELDS TERMINATED BY ','
--- OPTIONALLY ENCLOSED BY '"'
--- LINES TERMINATED BY '\n'
--- IGNORE 1 LINES
--- (answer_id, question_id, answer, @date, answerer, email, reported, answer_helpfulness)
--- SET datePosted = FROM_UNIXTIME(@date/1000);
+LOAD DATA LOCAL INFILE '/Users/mrcruz/HackReactor/SDC-CSV/answerTest.csv'
+INTO TABLE answers
+FIELDS TERMINATED BY ','
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(answer_id, question_id, answer, @date, answerer, email, reported, answer_helpfulness)
+SET datePosted = FROM_UNIXTIME(@date/1000);
 
--- SHOW WARNINGS;
+SHOW WARNINGS;
 
--- LOAD DATA LOCAL INFILE '/Users/mrcruz/HackReactor/SDC-CSV/photoTest.csv'
--- INTO TABLE answerPhotos
--- FIELDS TERMINATED BY ','
--- OPTIONALLY ENCLOSED BY '"'
--- LINES TERMINATED BY '\n'
--- IGNORE 1 LINES
+DELETE FROM answers WHERE answer_helpfulness IS NULL;
+
+LOAD DATA LOCAL INFILE '/Users/mrcruz/HackReactor/SDC-CSV/photoTest.csv'
+INTO TABLE answerPhotos
+FIELDS TERMINATED BY ','
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES

@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 
 //questions
 app.get('/:productId', question.getQuestions)
-
+app.post('/:productId', question.postQuestion);
 
 
 
