@@ -1,3 +1,5 @@
+var { question } = require('./controllers/');
+
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -15,6 +17,8 @@ app.use(bodyParser.json());
   - helpful and report requests for both Q&A
 */
 
+//questions
+app.get('/:productId', question.getQuestions)
 
 
 

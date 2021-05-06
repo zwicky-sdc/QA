@@ -39,7 +39,7 @@ CREATE TABLE answerPhotos(
   FOREIGN KEY (answer_id) REFERENCES answers (answer_id)
 );
 
-LOAD DATA LOCAL INFILE '/Users/mrcruz/HackReactor/SDC-CSV/questions.csv'
+LOAD DATA LOCAL INFILE '/Users/mrcruz/HackReactor/SDC-CSV/questionsTest.csv'
 INTO TABLE questions
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
@@ -48,9 +48,9 @@ IGNORE 1 LINES
 (id, product_id, question, @date, asker, email, reported, question_helpfulness)
   SET datePosted = FROM_UNIXTIME(@date/1000);
 
--- SHOW WARNINGS;
+SHOW WARNINGS;
 
--- DELETE FROM questions WHERE question_helpfulness IS NULL;
+DELETE FROM questions WHERE question_helpfulness IS NULL;
 
 -- LOAD DATA LOCAL INFILE '/Users/mrcruz/HackReactor/SDC-CSV/answerTest.csv'
 -- INTO TABLE answers
