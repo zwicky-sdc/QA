@@ -8,7 +8,7 @@ module.exports = {
     const { productId } = req.params;
 
     question.getQuestionsByProductId(productId)
-      .then((questions) => {
+      .then(questions => {
         res.status(200).send(questions);
       })
       .catch((err) => {
@@ -19,13 +19,38 @@ module.exports = {
 
   postQuestion: (req, res) => {
     const { productId } = req.params;
-    console.log('req.body: ',req.body)
+    //console.log('req.body: ',req.body)
     question.createQuestion(productId, req.body)
       .then(() => {
         res.sendStatus(201);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(err => {
+        console.loerrorg(err);
+        res.sendStatus(500);
+      });
+  },
+
+  putHelpful: (req, res) => {
+    const { questionId } = req.params;
+    question.updateQuestionHelpful(questionId)
+      .then(() => {
+
+        res.sendStatus(200);
+      })
+      .catch(err => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  },
+
+  putReport: (req, res) => {
+    const { questionId } = req.params;
+    question.updateQuestionReport(questionId)
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch(err => {
+        console.error(err);
         res.sendStatus(500);
       });
   },

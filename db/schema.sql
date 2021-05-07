@@ -39,7 +39,7 @@ CREATE TABLE answerPhotos(
   FOREIGN KEY (answer_id) REFERENCES answers (answer_id)
 );
 
-LOAD DATA LOCAL INFILE '/Users/mrcruz/HackReactor/SDC-CSV/questionsTest.csv'
+LOAD DATA LOCAL INFILE '/Users/mrcruz/HackReactor/SDC-CSV/questions.csv'
 INTO TABLE questions
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
@@ -48,11 +48,11 @@ IGNORE 1 LINES
 (id, product_id, question, @date, asker, email, reported, question_helpfulness)
   SET datePosted = FROM_UNIXTIME(@date/1000);
 
-SHOW WARNINGS;
+-- SHOW WARNINGS;
 
 DELETE FROM questions WHERE question_helpfulness IS NULL;
 
-LOAD DATA LOCAL INFILE '/Users/mrcruz/HackReactor/SDC-CSV/answerTest.csv'
+LOAD DATA LOCAL INFILE '/Users/mrcruz/HackReactor/SDC-CSV/answers.csv'
 INTO TABLE answers
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
@@ -61,11 +61,11 @@ IGNORE 1 LINES
 (answer_id, question_id, answer, @date, answerer, email, reported, answer_helpfulness)
 SET datePosted = FROM_UNIXTIME(@date/1000);
 
-SHOW WARNINGS;
+
 
 DELETE FROM answers WHERE answer_helpfulness IS NULL;
 
-LOAD DATA LOCAL INFILE '/Users/mrcruz/HackReactor/SDC-CSV/photoTest.csv'
+LOAD DATA LOCAL INFILE '/Users/mrcruz/HackReactor/SDC-CSV/answers_photos.csv'
 INTO TABLE answerPhotos
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
