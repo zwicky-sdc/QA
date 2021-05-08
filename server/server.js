@@ -1,4 +1,4 @@
-var { question } = require('./controllers/');
+var { question,answer } = require('./controllers/');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -20,9 +20,14 @@ app.use(bodyParser.json());
 //questions
 app.get('/:productId', question.getQuestions)
 app.post('/:productId', question.postQuestion);
-
 app.put('/question/:questionId/helpful', question.putHelpful);
 app.put('/question/:questionId/report', question.putReport);
+
+//answers
+app.get('/:questionId/answers', answer.getAnswers)
+app.post('/:questionId/answers', answer.postAnswer);
+app.put('/answer/:answerId/helpful', answer.putHelpful);
+app.put('/answer/:answerId/report', answer.putReport);
 
 
 app.listen(port, () =>
