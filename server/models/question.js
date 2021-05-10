@@ -16,7 +16,7 @@ module.exports = {
     for (let i = 0; i < questions.length; i++) {
       questions[i].answers = await answer.getAnswersByQuestionId(questions[i].id)
     }
-    console.log('QUESTIONS: ', questions)
+    //console.log('QUESTIONS: ', questions)
     return questions;
   },
 
@@ -25,7 +25,7 @@ module.exports = {
 
     return queryAsync(query, [productId, question, asker, email, new Date(), 0])
       .then((res) => {
-        console.log('successful question post: ', res)
+        //console.log('successful question post: ', res)
         return res;
       })
       .catch((err) => {
