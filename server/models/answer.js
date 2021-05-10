@@ -6,19 +6,11 @@ const connection = require('../../db/index.js');
 const queryAsync = Promise.promisify(connection.query).bind(connection);
 
 module.exports = {
-  getAnswersByQuestionId: (questionId) => {
+  getAnswersByQuestionId: async (questionId) => {
 
-    const query = `SELECT * FROM answers WHERE question_id = ${questionId}`;
-
-    return queryAsync(query)
-      .then(res => {
-
-        console.log(res)
-        return res;
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    var answers = await queryAsync(`SELECT * FROM answers WHERE question_id = ${questionId}`);
+    console.log(answers)
+    return answers
   },
 
   inputAnswer: (questionId, { answer, answerer, email }) => {

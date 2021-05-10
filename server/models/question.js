@@ -9,28 +9,15 @@ const queryAsync = Promise.promisify(connection.query).bind(connection);
 
 module.exports = {
   //This will also retrieve all relavent answers and answer pics in the proper format.
-  getQuestionsByProductId: (productId) => {
+  getQuestionsByProductId: async (productId) => {
 
-    const query = `SELECT * FROM QA.questions WHERE product_id = ${productId};`
+    var questions = await queryAsync(`SELECT * FROM QA.questions WHERE product_id = ${productId};`)
 
-    return queryAsync(query)
-      .then((res) => {
-        console.log('RES', res);
-        var questionsArr = [];
-
-        for (var i = 0; i < res.length; i++) {
-          var questionObj = res[i];
-
-          answer.getAnswersByQuestionId(res[i].id)
-            .then((answers) => {
-              console.log('answers: ', answers)
-            })
-          questionsArr.push(questionObj)
-        }
-        console.log('questionArr: ', questionsArr)
-
-        return res;
-      })
+    for (let i = 0; i < questions.length; i++) {
+      questions[i].answers = await answer.getAnswersByQuestionId(questions[i].id)
+    }
+    console.log('QUESTIONS: ', questions)
+    return questions;
   },
 
   createQuestion: (productId, { question, asker, email }) => {
