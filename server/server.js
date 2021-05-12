@@ -17,6 +17,11 @@ app.use(bodyParser.json());
   - helpful and report requests for both Q&A
 */
 
+//loader.io
+app.get(`/loaderio-bb356c7b1eaac0ba81bf2241d4c3c1b6/`, (req, res) => {
+  res.sendFile('loaderio-verification.txt');
+});
+
 //questions
 app.get('/:productId', question.getQuestions)
 app.post('/:productId', question.postQuestion);
