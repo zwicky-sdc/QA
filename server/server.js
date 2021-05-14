@@ -23,17 +23,23 @@ app.get(`/loaderio-bb356c7b1eaac0ba81bf2241d4c3c1b6/`, (req, res) => {
 });
 
 //questions
-app.get('/:productId', question.getQuestions)
-app.post('/:productId', question.postQuestion);
+app.get('/question/:productId', question.getQuestions)
+app.post('/question/:productId', question.postQuestion);
 app.put('/question/:questionId/helpful', question.putHelpful);
 app.put('/question/:questionId/report', question.putReport);
 
 //answers
-app.get('/:questionId/answers', answer.getAnswers)
+app.get('/answer/:questionId/answers', answer.getAnswers)
 app.post('/:questionId/answers', answer.postAnswer);
 app.put('/answer/:answerId/helpful', answer.putHelpful);
 app.put('/answer/:answerId/report', answer.putReport);
 
+app.get('/test', (req, res) => {
+  console.log('host: ', req.headers.host);
+  res.status(200);
+  res.send('hello world');
+  res.end();
+});
 
 app.listen(port, () =>
 console.log('listening on', `http://localhost:${port}`)

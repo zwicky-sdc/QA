@@ -1,4 +1,4 @@
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const Promise = require('bluebird');
 const answer = require('./answer.js')
 
